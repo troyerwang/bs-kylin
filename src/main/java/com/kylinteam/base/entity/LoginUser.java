@@ -6,7 +6,7 @@ import com.kylinteam.base.constant.Constant;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable {
+public class LoginUser implements Serializable {
 
     private static final long serialVersionUID = -721912626034105086L;
 
