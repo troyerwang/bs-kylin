@@ -34,7 +34,7 @@ public class UserController {
         LoginUser u = userService.findUserById(id);
         u.setAccount(user.getAccount());
         u.setPassword(user.getPassword());
-        user.setDisplayName(user.getDisplayName());
+        u.setDisplayName(user.getDisplayName());
         return userService.addUser(u);
     }
 
