@@ -51,4 +51,5 @@ public class LoginUser implements Serializable {
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
 }
