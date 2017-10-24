@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.transaction.Transactional;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -28,6 +28,8 @@ public class UserControllerTest {
 
     private Gson gson;
 
+    private RequestBuilder request;
+
     @Autowired
     private UserController userController;
 
@@ -39,9 +41,7 @@ public class UserControllerTest {
 
     @Test
     public void testUserController() throws Exception {
-        RequestBuilder request = null;
-
-        // 1. post a user
+        // 1. add a user
         LoginUser user = new LoginUser();
         user.setAccount("admin");
         user.setPassword("123456");
@@ -52,42 +52,51 @@ public class UserControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.account", is("admin")))
-                .andExpect(jsonPath("$.password", is("123456")))
-                .andExpect(jsonPath("$.displayName", is("管理员")));
+                .andExpect(jsonPath("$.result", is("00000000")))
+                .andExpect(jsonPath("$.data", notNullValue()))
+                .andExpect(jsonPath("$.data.account", is("admin")))
+                .andExpect(jsonPath("$.data.password", is("123456")))
+                .andExpect(jsonPath("$.data.displayName", is("管理员")));
 
         // 2. get user list
         request = get("/users/");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.result", is("00000000")))
+                .andExpect(jsonPath("$.data", notNullValue()))
+                .andExpect(jsonPath("$.data", hasSize(equalTo(1))));
 
-        // 4. change displayName which named admin.
+        // 3. change displayName which named admin.
         user.setDisplayName("修改过的名字");
         String jsonString2 = gson.toJson(user);
         request = put("/users/admin").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonString2);
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.account", is("admin")))
-                .andExpect(jsonPath("$.password", is("123456")))
-                .andExpect(jsonPath("$.displayName", is("修改过的名字")));
+                .andExpect(jsonPath("$.result", is("00000000")))
+                .andExpect(jsonPath("$.data", notNullValue()))
+                .andExpect(jsonPath("$.data.account", is("admin")))
+                .andExpect(jsonPath("$.data.password", is("123456")))
+                .andExpect(jsonPath("$.data.displayName", is("修改过的名字")));
 
-        // 5. get a user which named admin
+        // 4. get a user which named admin
         request = get("/users/admin");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(jsonPath("$.account", is("admin")))
-                .andExpect(jsonPath("$.password", is("123456")))
-                .andExpect(jsonPath("$.displayName", is("修改过的名字")));
+                .andExpect(jsonPath("$.result", is("00000000")))
+                .andExpect(jsonPath("$.data", notNullValue()))
+                .andExpect(jsonPath("$.data.account", is("admin")))
+                .andExpect(jsonPath("$.data.password", is("123456")))
+                .andExpect(jsonPath("$.data.displayName", is("修改过的名字")));
 
-        // 6. del a user which named admin
+        // 5. del a user which named admin
         request = delete("/users/admin");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("success"));
-
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.data", is("success")));
     }
 
 }

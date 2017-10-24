@@ -16,12 +16,12 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Object getUserList() {
+    public Object findAll() {
         return new ResponseListDTO<LoginUser>(RespCode.SUCCESS, "", userService.findAll());
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Object postUser(@RequestBody LoginUser user) {
+    public Object addUser(@RequestBody LoginUser user) {
         return new ResponseDTO<LoginUser>(RespCode.SUCCESS, "", userService.addUser(user));
     }
 
