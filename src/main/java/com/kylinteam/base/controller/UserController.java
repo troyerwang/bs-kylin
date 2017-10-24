@@ -24,23 +24,22 @@ public class UserController {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public LoginUser getUser(@PathVariable Long id) {
-        return userService.findUserById(id);
+    @RequestMapping(value="/{account}", method=RequestMethod.GET)
+    public LoginUser getUser(@PathVariable String account) {
+        return userService.findUserByAccount(account);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public LoginUser putUser(@PathVariable Long id, @RequestBody LoginUser user) {
-        LoginUser u = userService.findUserById(id);
-        u.setAccount(user.getAccount());
+    @RequestMapping(value="/{account}", method=RequestMethod.PUT)
+    public LoginUser putUser(@PathVariable String account, @RequestBody LoginUser user) {
+        LoginUser u = userService.findUserByAccount(account);
         u.setPassword(user.getPassword());
         u.setDisplayName(user.getDisplayName());
         return userService.addUser(u);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public String deleteUser(@PathVariable Long id) {
-        userService.deleteUserById(id);
+    @RequestMapping(value="/{account}", method=RequestMethod.DELETE)
+    public String deleteUser(@PathVariable String account) {
+        userService.deleteUserByAccount(account);
         return "success";
     }
 }

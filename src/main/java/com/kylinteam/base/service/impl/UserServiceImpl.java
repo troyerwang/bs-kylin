@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
         loginUserRepository.delete(id);
     }
 
+    @Override
+    public void deleteUserByAccount(String account) {
+        loginUserRepository.deleteUserByAccount(account);
+    }
+
 }

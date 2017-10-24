@@ -15,9 +15,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.transaction.Transactional;
 
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,67 +26,67 @@ public class UserControllerTest {
 
     private MockMvc mockMvc;
 
+    private Gson gson;
+
     @Autowired
     private UserController userController;
 
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
+        gson = new Gson();
     }
 
     @Test
     public void testUserController() throws Exception {
         RequestBuilder request = null;
 
-        // 1. get查询用户列表
-        request = get("/users/");
-        mockMvc.perform(request)
-                .andExpect(status().isOk())
-                .andExpect(content().string("[]"));
-
-        // 2. post提交一个user
-        Gson gson = new Gson();
+        // 1. post a user
         LoginUser user = new LoginUser();
-        user.setId(1l);
         user.setAccount("admin");
         user.setPassword("123456");
         user.setDisplayName("管理员");
         String jsonString = gson.toJson(user);
-        request = post("/users/").contentType(MediaType.APPLICATION_JSON).content(jsonString);
-        mockMvc.perform(request)
-                .andExpect(content().string("{\"id\":1,\"account\":\"admin\",\"password\":\"123456\",\"displayName\":\"管理员\"}"));
 
-        // 3. get获取user列表，存在一条刚插入的数据
+        request = post("/users/").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonString);
+        mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.account", is("admin")))
+                .andExpect(jsonPath("$.password", is("123456")))
+                .andExpect(jsonPath("$.displayName", is("管理员")));
+
+        // 2. get user list
         request = get("/users/");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("[{\"id\":1,\"account\":\"admin\",\"password\":\"123456\",\"displayName\":\"管理员\"}]"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8));
 
-        // 4. put修改id为1的user数据
+        // 4. change displayName which named admin.
         user.setDisplayName("修改过的名字");
         String jsonString2 = gson.toJson(user);
-        request = put("/users/1").contentType(MediaType.APPLICATION_JSON).content(jsonString2);
+        request = put("/users/admin").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonString2);
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"id\":1,\"account\":\"admin\",\"password\":\"123456\",\"displayName\":\"修改过的名字\"}"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.account", is("admin")))
+                .andExpect(jsonPath("$.password", is("123456")))
+                .andExpect(jsonPath("$.displayName", is("修改过的名字")));
 
-        // 5. get一个id为1的user
-        request = get("/users/1");
+        // 5. get a user which named admin
+        request = get("/users/admin");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("{\"id\":1,\"account\":\"admin\",\"password\":\"123456\",\"displayName\":\"修改过的名字\"}"));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(jsonPath("$.account", is("admin")))
+                .andExpect(jsonPath("$.password", is("123456")))
+                .andExpect(jsonPath("$.displayName", is("修改过的名字")));
 
-        // 6. del删除id为1的user
-        request = delete("/users/1");
+        // 6. del a user which named admin
+        request = delete("/users/admin");
         mockMvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("success"));
-
-        // 7. get查询一下user列表，此时为空
-        request = get("/users/");
-        mockMvc.perform(request)
-                .andExpect(status().isOk())
-                .andExpect(content().string("[]"));
 
     }
 
