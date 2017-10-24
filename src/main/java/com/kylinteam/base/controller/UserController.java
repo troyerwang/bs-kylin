@@ -14,22 +14,22 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value="/", method= RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<LoginUser> getUserList() {
         return userService.findAll();
     }
 
-    @RequestMapping(value="/", method=RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public LoginUser postUser(@RequestBody LoginUser user) {
         return userService.addUser(user);
     }
 
-    @RequestMapping(value="/{account}", method=RequestMethod.GET)
+    @RequestMapping(value = "/{account}", method = RequestMethod.GET)
     public LoginUser getUser(@PathVariable String account) {
         return userService.findUserByAccount(account);
     }
 
-    @RequestMapping(value="/{account}", method=RequestMethod.PUT)
+    @RequestMapping(value = "/{account}", method = RequestMethod.PUT)
     public LoginUser putUser(@PathVariable String account, @RequestBody LoginUser user) {
         LoginUser u = userService.findUserByAccount(account);
         u.setPassword(user.getPassword());
@@ -37,7 +37,7 @@ public class UserController {
         return userService.addUser(u);
     }
 
-    @RequestMapping(value="/{account}", method=RequestMethod.DELETE)
+    @RequestMapping(value = "/{account}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable String account) {
         userService.deleteUserByAccount(account);
         return "success";
