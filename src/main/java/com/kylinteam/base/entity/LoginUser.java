@@ -1,8 +1,9 @@
 package com.kylinteam.base.entity;
 
+import com.kylinteam.base.constant.Constant;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import com.kylinteam.base.constant.Constant;
 
 @Entity
 @Table(name = "tb_user")
@@ -13,10 +14,13 @@ public class LoginUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column(name = "account", length = Constant.DB_FIELD_LENGTH_50, nullable = false, unique = true)
     public String account;
+
     @Column(name = "password", length = Constant.DB_FIELD_LENGTH_50, nullable = false)
     private String password;
+
     @Column(name = "displayname", length = Constant.DB_FIELD_LENGTH_50)
     private String displayName;
 
