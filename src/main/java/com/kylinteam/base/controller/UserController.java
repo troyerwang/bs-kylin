@@ -17,13 +17,13 @@ public class UserController {
     UserService userService;
 
     @ApiOperation(value = "获取所有用户的信息")
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public Object findAll() {
         return new ResponseListDTO<LoginUser>(RespCode.SUCCESS, "", userService.findAll());
     }
 
     @ApiOperation(value = "添加用户")
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = {"", "/"}, method = RequestMethod.POST)
     public Object addUser(@RequestBody LoginUser user) {
         return new ResponseDTO<LoginUser>(RespCode.SUCCESS, "", userService.addUser(user));
     }
@@ -46,6 +46,7 @@ public class UserController {
     @ApiOperation(value = "根据账号删除一个用户")
     @RequestMapping(value = "/{account}", method = RequestMethod.DELETE)
     public Object deleteUser(@PathVariable String account) {
+        userService.deleteUserByAccount(account);
         return new ResponseDTO<String>(RespCode.SUCCESS, "", "success");
     }
 }
