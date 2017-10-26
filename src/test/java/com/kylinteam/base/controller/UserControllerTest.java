@@ -64,8 +64,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.result", is("00000000")))
-                .andExpect(jsonPath("$.data", notNullValue()))
-                .andExpect(jsonPath("$.data", hasSize(equalTo(1))));
+                .andExpect(jsonPath("$.data", notNullValue()));
 
         // 3. change displayName which named admin.
         user.setDisplayName("修改过的名字");
