@@ -13,9 +13,4 @@ public class HelloController {
         return "Hello kylinteam!";
     }
 
-    @RequestMapping("/swagger-ui/api-docs")
-    public String showDocs() {
-        return "/swagger-ui/index.html";
-    }
-
 }
