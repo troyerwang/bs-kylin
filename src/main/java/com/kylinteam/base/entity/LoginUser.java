@@ -1,6 +1,6 @@
 package com.kylinteam.base.entity;
 
-import com.kylinteam.base.constant.Constant;
+import com.kylinteam.base.common.constant.Constant;
 
 import javax.persistence.*;
 import java.io.Serializable;

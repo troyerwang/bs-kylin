@@ -1,4 +1,4 @@
-package com.kylinteam.base.config;
+package com.kylinteam.base.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.kylinteam.base.constant;
+package com.kylinteam.base.common.constant;
 
 public interface RespCode {
 

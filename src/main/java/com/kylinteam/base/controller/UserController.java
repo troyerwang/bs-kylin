@@ -1,6 +1,6 @@
 package com.kylinteam.base.controller;
 
-import com.kylinteam.base.constant.RespCode;
+import com.kylinteam.base.common.constant.RespCode;
 import com.kylinteam.base.controller.resp.ResponseDTO;
 import com.kylinteam.base.controller.resp.ResponseListDTO;
 import com.kylinteam.base.entity.LoginUser;
