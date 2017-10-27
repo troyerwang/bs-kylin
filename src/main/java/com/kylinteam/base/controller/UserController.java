@@ -7,6 +7,11 @@ import com.kylinteam.base.entity.LoginUser;
 import com.kylinteam.base.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -49,4 +54,13 @@ public class UserController {
         userService.deleteUserByAccount(account);
         return new ResponseDTO<String>(RespCode.SUCCESS, "", "success");
     }
+
+    @ApiOperation(value = "获取所有用户的信息")
+    @RequestMapping(value = {"/page"}, method = RequestMethod.GET)
+    public Object findAllByPage(int page, int size) {
+        Sort sort = new Sort(Direction.DESC, "account");
+        Pageable pageable = new PageRequest(page, size, sort);
+        return new ResponseDTO<Page<LoginUser>>(RespCode.SUCCESS, "", userService.findAll(pageable));
+    }
+
 }

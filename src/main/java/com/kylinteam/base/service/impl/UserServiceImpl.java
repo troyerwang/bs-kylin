@@ -4,6 +4,8 @@ import com.kylinteam.base.entity.LoginUser;
 import com.kylinteam.base.repository.LoginUserRepository;
 import com.kylinteam.base.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -44,6 +46,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserByAccount(String account) {
         loginUserRepository.deleteByAccount(account);
+    }
+
+    @Override
+    public Page<LoginUser> findAll(Pageable pageable) {
+        return loginUserRepository.findAll(pageable);
     }
 
 }

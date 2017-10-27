@@ -1,6 +1,8 @@
 package com.kylinteam.base.service;
 
 import com.kylinteam.base.entity.LoginUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -18,6 +20,6 @@ public interface UserService {
 
     void deleteUserByAccount(String account);
 
-
+    Page<LoginUser> findAll(Pageable pageable);
 
 }
