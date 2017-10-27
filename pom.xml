@@ -82,6 +82,14 @@
 		</dependency>
 		<!-- third component tools-->
 
+		<!-- kylinteam dev tools-->
+		<dependency>
+			<groupId>com.github.crazyxxl</groupId>
+			<artifactId>spring-boot-start-demo-jwt</artifactId>
+			<version>0.0.1-RELEASE</version>
+		</dependency>
+		<!-- kylinteam dev tools-->
+
 	</dependencies>
 
 	<build>
