@@ -1,13 +1,13 @@
 package com.kylinteam.base.controller;
 
 import com.kylinteam.base.common.constant.RespCode;
+import com.kylinteam.base.controller.resp.PageBean;
 import com.kylinteam.base.controller.resp.ResponseDTO;
 import com.kylinteam.base.controller.resp.ResponseListDTO;
 import com.kylinteam.base.entity.LoginUser;
 import com.kylinteam.base.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -56,11 +56,11 @@ public class UserController {
     }
 
     @ApiOperation(value = "获取所有用户的信息")
-    @RequestMapping(value = {"/page"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/list"}, method = RequestMethod.POST)
     public Object findAllByPage(int page, int size) {
         Sort sort = new Sort(Direction.DESC, "account");
-        Pageable pageable = new PageRequest(page, size, sort);
-        return new ResponseDTO<Page<LoginUser>>(RespCode.SUCCESS, "", userService.findAll(pageable));
+        Pageable pageable = new PageRequest(page - 1, size, sort);
+        return new PageBean<LoginUser>(userService.findAll(pageable));
     }
 
 }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>xxxx</title>
+        <link href="../static/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/animate.css/animate.min.css}"></link>
+        <link href="../static/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet" th:href="@{/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css}"></link>
+        <link href="../static/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css}"></link>
+        <link href="../static/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"></link>
+        <link href="../static/vendors/bower_components/bootgrid/jquery.bootgrid.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/bootgrid/jquery.bootgrid.min.css}"></link>
+        <link href="../static/css/app.min.1.css" th:href="@{/css/app.min.1.css}" rel="stylesheet"></link>
+        <link href="../static/css/app.min.2.css" th:href="@{/css/app.min.2.css}" rel="stylesheet"></link>
+        <style>
+        	table td, th {
+        		white-space:nowrap;
+        	}
+        	
+        	#data-table-selection td {
+        		vertical-align: middle;
+        	}
+        </style>
+    </head>
+    <body>
+    	<div th:substituteby="admin/common/header :: header"></div>
+        <section id="main" data-layout="layout-1">
+            <div th:substituteby="admin/common/aside :: aside"></div>
+            <section id="content">
+                <div class="container">
+                    <div class="block-header">
+                        <div class="card">
+	                        <div class="card-header">
+	                            <h2>用户列表</h2>
+	                        </div>
+	                        <div class="table-responsive">
+	                            <table id="data-table-selection" class="table table-striped">
+	                                <thead>
+	                                    <tr>
+	                                    	<th data-column-id="type" data-sortable="false" >账号</th>
+	                                        <th data-column-id="name" data-sortable="false">用户名</th>
+	                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false">操作</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr th:each="p:${list}">
+	                                    	<td th:text="${p.account}">张三</td>
+	                                        <td th:text="${p.displayName}">排行三</td>
+	                                    </tr>
+	                                </tbody>
+	                            </table>
+	                        </div>
+	                    </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <div th:substituteby="admin/common/footer :: footer"></div>
+        <div th:substituteby="admin/common/loader :: loader"></div>
+        <script src="../static/vendors/bower_components/jquery/dist/jquery.min.js" th:src="@{/vendors/bower_components/jquery/dist/jquery.min.js}"></script>
+        <script src="../static/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <script src="../static/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" th:src="@{/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+        <script src="../static/vendors/bower_components/Waves/dist/waves.min.js" th:src="@{/vendors/bower_components/Waves/dist/waves.min.js}"></script>
+        <script src="../static/vendors/bower_components/moment/min/moment.min.js" th:src="@{/vendors/bower_components/moment/min/moment.min.js}"></script>
+        <script src="../static/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js" th:src="@{/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js}"></script>
+		<script src="../static/vendors/bootgrid/jquery.bootgrid.updated.min.js" th:src="@{/vendors/bower_components/bootgrid/jquery.bootgrid.updated.min.js}"></script>
+        <script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#data-table-selection").bootgrid({
+                    css: {
+                        icon: 'zmdi icon',
+                        iconColumns: 'zmdi-view-module',
+                        iconDown: 'zmdi-expand-more',
+                        iconRefresh: 'zmdi-refresh',
+                        iconUp: 'zmdi-expand-less'
+                    },
+                    selection: true,
+                    multiSelect: true,
+                    rowSelect: true,
+                    keepSelection: true,
+                    formatters: {
+                        "commands": function(column, row) {
+                            return '<button class="btn btn-info waves-effect" onClick="updProduct(' + row.id + ');">修改</button> '
+                            + ' <button class="btn btn-danger waves-effect" onClick="confirmDelProduct(' + row.id + ');">删除</button>'
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

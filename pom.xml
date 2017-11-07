@@ -72,6 +72,12 @@
 			<artifactId>gson</artifactId>
 			<version>${gson.verison}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<!-- common tools -->
 
 		<!-- third component tools-->
@@ -90,6 +96,12 @@
 		</dependency>
 		<!-- kylinteam dev tools-->
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -98,6 +110,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<fork>true</fork>
 					<executable>true</executable>
 				</configuration>
 			</plugin>

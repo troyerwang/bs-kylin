@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <title>网站后台管理系统-控制台</title>
+        <link href="../static/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/animate.css/animate.min.css}"></link>
+        <link href="../static/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet" th:href="@{/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css}"></link>
+        <link href="../static/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css}"></link>
+        <link href="../static/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css" rel="stylesheet" th:href="@{/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css}"></link>   
+        <link href="../static/css/app.min.1.css" th:href="@{/css/app.min.1.css}" rel="stylesheet"></link>
+        <link href="../static/css/app.min.2.css" th:href="@{/css/app.min.2.css}" rel="stylesheet"></link>
+    </head>
+    <body>
+        <div th:substituteby="admin/common/header :: header"></div>
+        <section id="main" data-layout="layout-1">
+            <div th:substituteby="admin/common/aside :: aside"></div>
+            <section id="content">
+                <div class="container">
+                    <div class="block-header">
+                        <h1>控制台</h1>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <div th:substituteby="admin/common/footer :: footer"></div>
+        <div th:substituteby="admin/common/loader :: loader"></div>
+        <script src="../static/vendors/bower_components/jquery/dist/jquery.min.js" th:src="@{/vendors/bower_components/jquery/dist/jquery.min.js}"></script>
+        <script src="../static/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <script src="../static/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" th:src="@{/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+        <script src="../static/vendors/bower_components/Waves/dist/waves.min.js" th:src="@{/vendors/bower_components/Waves/dist/waves.min.js}"></script>
+        <script src="../static/vendors/bower_components/moment/min/moment.min.js" th:src="@{/vendors/bower_components/moment/min/moment.min.js}"></script>
+        <script src="../static/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js" th:src="@{/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js}"></script>
+        <script src="../static/js/functions.js" th:src="@{/js/functions.js}"></script>
+    </body>
+</html>
