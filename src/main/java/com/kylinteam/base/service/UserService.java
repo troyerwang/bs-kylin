@@ -22,4 +22,8 @@ public interface UserService {
 
     Page<LoginUser> findAll(Pageable pageable);
 
+    LoginUser findUserByReskey(String reskey);
+
+    void deleteUserByResKey(String reskey);
+
 }

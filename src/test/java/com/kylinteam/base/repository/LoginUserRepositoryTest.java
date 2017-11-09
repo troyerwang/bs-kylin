@@ -25,23 +25,23 @@ public class LoginUserRepositoryTest {
     @Before
     public void initData() {
         LoginUser loginUser = new LoginUser();
-        loginUser.setAccount("abcd");
-        loginUser.setPassword("abcd123");
-        loginUser.setDisplayName("ABCDEFG");
+        loginUser.setAccount("中文1");
+        loginUser.setPassword("中文11");
+        loginUser.setDisplayName("中文111");
         loginUserRepository.save(loginUser);
     }
 
     @Test
     public void findByAccount() throws Exception {
-        LoginUser loginUser = loginUserRepository.findByAccount("abcd");
-        Assert.assertEquals("abcd123", loginUser.getPassword());
-        Assert.assertEquals("ABCDEFG", loginUser.getDisplayName());
+        LoginUser loginUser = loginUserRepository.findByAccount("中文1");
+        Assert.assertEquals("中文11", loginUser.getPassword());
+        Assert.assertEquals("中文111", loginUser.getDisplayName());
     }
 
     @Test
     public void deleteByAccount() throws Exception {
-        loginUserRepository.deleteByAccount("abcd");
-        LoginUser loginUser = loginUserRepository.findByAccount("abcd");
+        loginUserRepository.deleteByAccount("中文1");
+        LoginUser loginUser = loginUserRepository.findByAccount("中文1");
         Assert.assertNull(loginUser);
     }
 

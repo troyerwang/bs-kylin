@@ -24,6 +24,11 @@ public class LoginUser implements Serializable {
     @Column(name = "displayname", length = Constant.DB_FIELD_LENGTH_50)
     private String displayName;
 
+    private Long time;
+
+    @Column(name = "reskey", length = Constant.DB_FIELD_LENGTH_50)
+    private String reskey;
+
     public Long getId() {
         return id;
     }
@@ -56,4 +61,19 @@ public class LoginUser implements Serializable {
         this.displayName = displayName;
     }
 
+    public String getReskey() {
+        return reskey;
+    }
+
+    public void setReskey(String reskey) {
+        this.reskey = reskey;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
 }

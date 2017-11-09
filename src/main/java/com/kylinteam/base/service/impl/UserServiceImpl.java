@@ -53,4 +53,14 @@ public class UserServiceImpl implements UserService {
         return loginUserRepository.findAll(pageable);
     }
 
+    @Override
+    public LoginUser findUserByReskey(String reskey) {
+        return loginUserRepository.findByReskey(reskey);
+    }
+
+    @Override
+    public void deleteUserByResKey(String reskey) {
+        loginUserRepository.deleteByReskey(reskey);
+    }
+
 }

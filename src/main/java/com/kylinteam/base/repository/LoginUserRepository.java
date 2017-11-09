@@ -9,4 +9,10 @@ public interface LoginUserRepository extends JpaRepository<LoginUser, Long>{
 
     void deleteByAccount(String account);
 
+    LoginUser findByAccountAndPassword(String account, String password);
+
+    LoginUser findByReskey(String reskey);
+
+    void deleteByReskey(String reskey);
+
 }
